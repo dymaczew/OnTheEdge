@@ -2,6 +2,8 @@
 
 ![edge computing](images/2020/01/edge-computing.png)
 
+[GitHub Pages](https://rhine59.github.io/OnTheEdge/)
+
 Faststart 2020 lab materials providing an introduction to IBM Edge Computing
 
 <!-- TOC -->
@@ -9,7 +11,7 @@ Faststart 2020 lab materials providing an introduction to IBM Edge Computing
 - [OnTheEdge - Edge Computing - FastStart 2020](#ontheedge---edge-computing---faststart-2020)
 - [Learning Objectives](#learning-objectives)
 - [Some Advice](#some-advice)
-- [Introductory materials](#introductory-materials)
+- [Introductory & reference materials](#introductory--reference-materials)
 - [Assumed prerequisites](#assumed-prerequisites)
 - [Cookbook Index](#cookbook-index)
 - [Optional Activities](#optional-activities)
@@ -39,9 +41,35 @@ There is some latency in these labs, be patient and allow time for your changes 
 
 **Do this now!**
 
-Start both of your SkyTap VMs now to allow them to initialise.
+Verify that both of your SkyTap VMs are started (start them if not to allow them to initialise)
 
-# Introductory materials
+0. [Connecting to the Lab environment](./ConnectToLabEnvrionment.md)
+
+
+# Introduction
+
+If you are totally not familar with IBM Edge Computing Manager and with *edge computing* idea in general, consider spending few minutes on reviewing the materials in the **Introductory & Reference materials** section below. This should help you understand what you are doing in the exercises.
+
+# Assumed prerequisites
+
+1. A Mac or Linux based desktop. If you are a Windows user then find a suitable team member.
+2. Basic command line Linux skills
+
+# Cookbook Index
+
+1. Optional [A Tour of the Edge web console](https://www.ibm.com/cloud/garage/dte/producttour/ibm-edge-computing-product-tour)
+
+2. [Introduction to edge device exercises](./EdgeDeviceStoryboard.md)
+3. [Tutorial for Edge Device Lab](./EdgeDeviceLab.md)
+
+4. [Introduction to edge cluster exercises](./EdgeServerStoryboard.md)
+5. [Tutorial for Edge cluster Lab](./EdgeServerLab.md)
+
+# Optional Activities
+
+1. [Building a development environment on your Mac](./BuildingDevEnvironment.md)
+
+# Introductory & Reference materials
 
 [Edge Computing in 2 minutes](https://youtu.be/AF5ZkcnptMs)
 
@@ -60,30 +88,3 @@ Start both of your SkyTap VMs now to allow them to initialise.
 [Edge Installation](https://ibm.box.com/s/pwgvv5du2hji6cick2getbx6108ddbgl)
 
 [Product manuals](https://www.ibm.com/support/knowledgecenter/SSFKVV_3.2.1/kc_welcome_containers.html)
-
-# Assumed prerequisites
-
-1. A SkyTap Account
-2. A Mac or Linux based desktop. If you are a Windows user then find a suitable team member.
-3. Basic command line Linux skills
-
-# Cookbook Index
-
-1. [A Tour of the Edge web console](https://github.ibm.com/Richard-Hine/OnTheEdge/blob/master/ConsoleTour.md)
-
-2. [Edge Device Storyboard](https://github.ibm.com/Richard-Hine/OnTheEdge/blob/master/EdgeDeviceStoryboard.md)
-3. [Edge Device Lab](https://github.ibm.com/Richard-Hine/OnTheEdge/blob/master/EdgeDeviceLab.md)
-
-
-4. [Edge Server Storyboard](https://github.ibm.com/Richard-Hine/OnTheEdge/blob/master/EdgeServerStoryboard.md)
-5. [Edge Server Lab](https://github.ibm.com/Richard-Hine/OnTheEdge/blob/master/EdgeServerLab.md)
-
-# Optional Activities
-
-1. [Building a development environment on your Mac](https://github.ibm.com/Richard-Hine/OnTheEdge/blob/master/BuildingDevEnvironment.md)
-
-# ToDo
-
-- Interact with application
-- Connect to Edge server
-- Deploy HELM Chart to Edge Server.

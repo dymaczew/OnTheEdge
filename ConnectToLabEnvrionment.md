@@ -4,7 +4,7 @@
 
 For the labs related to the IBM Edge Application Manager, you will be using the central Hub server installed in IBM Cloud. This environment is setup to be multi-tenant where each student has their own userid.  Each student will have their own managed edge device in Skytap that you will manage from the centralized Hub server.
 
-![](images/2020-02-17-11-35-24.png)
+![](images/2020-02-17-21-24-34.png)
 
 <table border="1">
 <tr><th colspan="3">Access credentials</th></tr>

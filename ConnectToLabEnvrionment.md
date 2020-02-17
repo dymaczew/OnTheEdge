@@ -18,15 +18,13 @@ For the labs related to the IBM Edge Application Manager, you will be using the 
 
 To access the Hub cluster open a browser on your workstation and point it to:
 
-[Edge Hub Console](https://fs20edgem.169.62.229.212.nip.io:8443)
+<a href="https://fs20edgem.169.62.229.212.nip.io:8443" target="_blank">https://fs20edgem.169.62.229.212.nip.io:8443</a>
 
 **ATTENTION: Lab tutorials were tested with Firefox browser.**
 
 ## Connecting to the managed devices
 
-[SKYTAP - Access your Managed devices](https://ibm.biz/fs20skytap)
-
-To access the managed devices you need a terminal with SSH client. On Mac or Linux workstation use a regular terminal, on Windows use Putty
+To access the managed cluster you need a terminal with SSH client. On Mac or Linux workstation use a regular terminal, on Windows use Putty
 
 Open the Session URL given you by instructor. You should see the form similar to the one shown below:
 
@@ -40,7 +38,7 @@ Verify that the environment was started. Click **Launch Lab** link on the left.
 
 ![](images/2020-01-20-14-16-12.png)
 
-If the VMs are not running start them clicking **Play** button.
+If the managed cluster VM is not running start it clicking **Play** button. 
 
 ![](images/2020-01-21-22-45-24.png)
 
@@ -96,3 +94,5 @@ For Windows use WinSCP or equivalent tool
     <td>dymaczewski@pl.ibm.com</td>
   </tr>
 </table>
+
+

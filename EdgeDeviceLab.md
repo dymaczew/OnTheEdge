@@ -1,10 +1,10 @@
-  # Edge Device Lab
+# Edge Device Lab
 
 ![Edge Computing Title](images/2020-01-23-21-09-59.png)
 
-## WARNING
+### WARNING
 
-Stick to the naming convention for all artefacts that you create (adding userXX where appropriate) as this is a multi tenant environment. If you do not, this will create problems for you and others.
+**Stick to the naming convention for all artefacts that you create (adding userXX where appropriate) as this is a multi tenant environment. If you do not, this will create problems for you and others.**
 
 ## Edge Device management scenario
 
@@ -50,7 +50,7 @@ When your `edge-device` is active, then connect via SSH
 
 Credentials for the Edge Device VM are `localuser / passw0rd`
 
-![edge device active](images/2020/01/edge-device-active.png)
+***Screenshot needed***
 
 From a MAC or Linux run the command similar to the following from a local terminal on your workstation
 
@@ -68,10 +68,9 @@ localuser@edge-device:~$
 
 ```
 
-### 3. Setup the environment in your Device VM
+## Setup the environment in your Device VM
 
-When you start this exercise, there is no Horizon agent installed on this device, but if you need to reset, then run then 
-go to reset the environment session at the bottom
+When you start this exercise, there is no Horizon agent installed on this device, but if you need to reset, then check this [section](#reset-the-edge-device) at the bottom to reset the environment 
 
 ### 4. Prepare to register the Edge device.
 
@@ -80,17 +79,28 @@ Follow the instruction working in the terminal window connected to the edge-devi
 Binaries for the edge device agent are already copied to your device, you can find them in `~/horizon-edge-packages`
 
 In order to register edge-device VM as a managed edge device you need 2 additional items:
-- api key
-- CA certificate for the IBM Edge Application Manager hub environment
+- **api key** to authenticate yourself to the Edge Management hub
+- **CA certificate** for SSL connection to the IBM Edge Application Manager hub environment 
 
-`cloudctl` and `kubectl` are already installed in this VM, but if you are working from your own MAC laptop, then you will find the binaries [here](https://169.62.229.212:8443/console/tools/cli). You can of course us your existing workstation if you have the clients installed.
+In order to get these items you will run the following commnads.
 
-Authenticate to the Kubernetes server hosting the Edge Hub
+***NOTE: `cloudctl` and `kubectl` are already installed in this VM, but if you are working from your own MAC laptop, then you will find the binaries [here](https://169.62.229.212:8443/console/tools/cli). You can of course use your existing workstation if you have the clients installed, but then you will need to transfer these files to the edge device.***
 
-```
+Authenticate to the IBM Edge Application Manager hub (Check the handout given you by instructor to find a group you should use)
+
+<span style="color:green">**Group A**</span>
+
+<pre style="color:green">
 cloudctl login -a  https://fs20edgem.169.62.229.212.nip.io:8443 -u <userXX> \
 -p ReallyStrongPassw0rd --skip-ssl-validation -n <userXX>
-```
+</pre>
+
+<span style="color:blue">**Group B**</span>
+<pre style="color:blue">
+cloudctl login -a  https://bluem1.169.63.59.84.nip.io:8443 -u <userXX> \
+-p ReallyStrongPassw0rd --skip-ssl-validation -n <userXX>
+</pre>
+
 
 The output should look like
 
@@ -120,27 +130,37 @@ OK
 We need to generate a Kubernetes API key that will be used when the horizon agent connects to the hub. Make your key name unique as this is a multi tenant environment.
 
 ```
-cloudctl iam api-key-create <userXX> -d "FastStart 2020 Edge UserXX API Key" -f edge-api-key
+cloudctl iam api-key-create <userXX>-api-key -d "FastStart 2020 Edge UserXX API Key" -f edge-api-key
 ```
 
 The output should look like below
 
 ```
-Creating API key user01 as user01...
+Creating API key user01-api-key as user01...
 OK
-API key user01 created
+API key user01-api-key created
 Successfully saved API key information to edge-api-key
+```
 
-localuser@edge-device:~$ cat edge-api-key
+List the content of the file
+
+```
+cat edge-api-key
 {
-	"name": "user01",
+	"name": "user01-api-key",
 	"description": "FastStart 2020 Edge User01 API Key",
 	"apikey": "iX0hMrFw9xlN4m1E9XQC6-MDBLsQdu9PVeHm-I9Vwji9",
 	"createdAt": "2020-01-10T13:17+0000"
 }
+```
+
+Change working directory to the one where the installtion binaries are located
 
 ```
-Take the `apikey` value from the `edge-api-key` file and update the `HZN_EXCHANGE_USER_AUTH` variable value in `agent-install.cfg` located in `horizon-edge-packages` directory.
+cd ~/horizon-edge-packages
+```
+
+Take the `apikey` value from the `edge-api-key` file (you displayed it a step before - right?) and update the `HZN_EXCHANGE_USER_AUTH` variable value in `agent-install.cfg`.
 
 something like ...
 
@@ -157,6 +177,16 @@ kubectl --namespace kube-system get secret cluster-ca-cert -o jsonpath="{.data['
 base64 --decode > /home/localuser/horizon-edge-packages/agent-install.crt
 ```
 Add a `HZN_DEVICE_ID` variable value to `agent-install.cfg` and make it unique, as this will make it easier to find your device in the Web console.
+
+<span style="color:blue">**Group B Only**</span>
+
+<span style="color:blue">Update also the values for other variables</span>
+<pre style="color:blue">
+HZN_EXCHANGE_URL=https://169.63.59.84:8443/ec-exchange/v1
+HZN_FSS_CSSURL=https://169.63.59.84:8443/ec-css
+HZN_ORG_ID=bluem1
+</pre>
+
 
 When you are ready to register the device to the hub, your `agent-install.cfg` should look something like ...
 

@@ -36,7 +36,13 @@ Building a new service for Smart Scale devices
 
 The link to the Edge hub server is below:
 
+**Group A**
+
 [IBM Edge Computing Manager console](https://fs20edgem.169.62.229.212.nip.io:8443/edge#/)
+
+**Group B**
+
+[IBM Edge Computing Manager console](https://fs20edgem.169.63.59.84.nip.io:8443/edge#/)
 
 After you have authenticated to the Edge Hub Server, you will need to navigate to the Edge management console via `Hamburger Menu` > `Edge Computing`
 
@@ -190,6 +196,8 @@ HZN_ORG_ID=bluem1
 
 When you are ready to register the device to the hub, your `agent-install.cfg` should look something like ...
 
+**Group A**
+
 ```
 HZN_EXCHANGE_URL=https://fs20edgem.169.62.229.212.nip.io:8443/ec-exchange/v1
 HZN_FSS_CSSURL=https://fs20edgem.169.62.229.212.nip.io:8443/ec-css
@@ -197,6 +205,17 @@ HZN_ORG_ID=fs20edgem
 HZN_DEVICE_ID=user01device1
 HZN_EXCHANGE_USER_AUTH=iamapikey:iX0hMrFw9xlN4m1E9XQC6-MDBLsQdu9PVeHm-I9Vwji9
 ```
+
+**Group B**
+
+```
+HZN_EXCHANGE_URL=https://169.63.59.84:8443/ec-exchange/v1
+HZN_FSS_CSSURL=https://169.63.59.84:8443/ec-css
+HZN_ORG_ID=bluem1
+HZN_DEVICE_ID=user01device1
+HZN_EXCHANGE_USER_AUTH=iamapikey:iX0hMrFw9xlN4m1E9XQC6-MDBLsQdu9PVeHm-I9Vwji9
+```
+
 <span style="color:red">ATTENTION: Make sure that you precede your API key with `'iamapikey:'`</span>
 
 copy this file to `/etc/default/horizon` to provide system wide defaults.
@@ -344,9 +363,15 @@ Now we are going to add some properties and constraints to the device node and u
 
 Firstly, copy the lab assets to your VM.
 
+**Group A**
+
 ```
 cd ~ && git clone https://github.com/rhine59/EdgeLabStudentFiles.git
-Cloning into 'EdgeLabStudentFiles'...
+```
+
+**Group B**
+```
+cd ~ && git clone https://github.com/dymaczew/EdgeLabStudentFiles.git
 ```
 
 ## Node policies
@@ -424,7 +449,7 @@ Success again - check the details of your node in the Edge Hub GUI and note the 
 
 ### 7. Check deployed services
 
-Now, verify what services are running on the device.
+Now, verify what services are running on the device. (It can take a minute or 2 so be patient)
 
 ```
 hzn agreement list
@@ -475,6 +500,11 @@ b9f30198fa16        acmegrocery/analysis_amd64:v1   "docker-entrypoint.s…"   8
 b54f692f2003        acmegrocery/battery_amd64:v1    "docker-entrypoint.s…"   28 minutes ago      Up 28 minutes       8080/tcp            f1b5a6fcde55da5a31be7392d15950d0c4d1662bd3b082370fdd2092f40454b1-battery_service
 ```
 
+You can also see this in the UI (you may need to scroll down the node details page to see this)
+
+![](images/2020-02-18-16-21-52.png)
+
+
 ## Congratulations! Your smartcart device is ready to go!
 
 Now, let's explore in more details how to build and deploy a service using a smartscale as example. In the real world the smart devices are usually dedicated hardware devices. For our lab we will repurpose the edge-device VM and you will observe
@@ -493,7 +523,7 @@ localuser@edge-device:~/EdgeLabStudentFiles/smartscale$ cat smartscale-node-regi
     "properties": [   /* A list of policy properties that describe the object. */
       {"name": "smartscale", "value": true},
       {"name": "user", "value": "userXX"},
-      {"name": "location", "value": "Obornicka 127, 62-002 Suchy Las, Poland"},
+      {"name": "location", "value": "3801 S Las Vegas Blvd, NV 89109, USA"},
       {"name": "type", "value": "SmartScale Video Analytics 1000"}
     ],
     "constraints": [  /* A list of constraint expressions of the form <property name> <operator> <property value>, separated by boolean o
@@ -503,13 +533,13 @@ localuser@edge-device:~/EdgeLabStudentFiles/smartscale$ cat smartscale-node-regi
   }
 ```
 
-**Important!!! Edit the `smartscale-node-registration.json` and replace `userXX` with your userid!**
+**Important!!! Before proceeding edit the `smartscale-node-registration.json` and replace `userXX` with your userid!**
 
 So now we will re-register our Edge device with these new properties. We have done this earlier, so I will not include the verbose command output here.
 
 `sudo ./agent-install.sh -l 1 -n ../EdgeLabStudentFiles/smartscale/smartscale-node-registration.json`
 
-Check the attributes of the `device` from the IBM Edge Computing Manager user interface and see how they have changed.
+Check the attributes of the `device` from the IBM Edge Application Manager user interface and see how they have changed.
 
 ![smartscale properties](images/2020/01/smartscale-properties.png)
 
@@ -526,6 +556,8 @@ For the sake of time, we are now going to create new service based on docker ima
 ![dockerhub images](images/2020/01/dockerhub-images.png)
 
 We will use the `scales` DockerHub image for our Edge service rather than spend the time creating new one.
+
+![](images/2020-01-22-22-17-41.png)
 
 ### 8. Build Edge service metadata
 
@@ -548,7 +580,9 @@ We now need to create some metadata that is used to define our new service to th
 
 Make your userid a part of the `service` name to make it unique! Add your assigned userid e.g. `user01` to the `service` name. There are multiple students using the same Edge Hub server, and you need to identify your service as unique.
 
-To generate a service metadata file you can use `hzn dev service new` command. However for the sake of time we have already did it for you. Explore the generated files in `/home/localuser/EdgeLabStudentFiles/smartscale/smartscale-service` and horizon metadata files in `/home/localuser/EdgeLabStudentFiles/smartscale/smartscale-service/horizon`. 
+To generate a service metadata file you can use `hzn dev service new` command. However for the sake of time we have already did it for you. Explore the generated files in `/home/localuser/EdgeLabStudentFiles/smartscale/smartscale-service` 
+
+`cd ~/EdgeLabStudentFiles/smartscale/smartscale-service/`
 
 You will need to change these generated files - read on!
 
@@ -558,9 +592,7 @@ Look at `hzn.json` and `service.definition.json`.
 
 Later on, if you are going to experiment with service upgrades, you can change the tags, but for now, stick with `v1`.
 
-![](images/2020-01-22-22-17-41.png)
-
-See `hzn.json`
+Edit `hzn.json` to add your user it (userXX-) to the service name as below
 <pre>
 {
     "HZN_ORG_ID": "fs20edgem",
@@ -604,19 +636,51 @@ Make sure that **userXX** matches your userid.
 We now need to publish this new service to the IBM Edge Application Manager hub
 
 ```
-cd ~/EdgeLabStudentFiles/smartscale/smartscale-service/horizon
-hzn exchange service publish -O -I -f service.definition.json -p service.policy.json -v
+cd ~/EdgeLabStudentFiles/smartscale/smartscale-service
+./publish.sh
 ```
+
+This script is a wraper for the following command `hzn exchange service publish -O -I -f service.definition.json -p service.policy.json -v`
+
 Output should lokk like below:
 
 ```
-Creating user01-service-scale_1.0.0_amd64 in the exchange...
+[verbose] Reading configuration file: /etc/horizon/hzn.json
+[verbose] Reading configuration file: /etc/default/horizon
+[verbose] Config file does not exist: /home/localuser/.hzn/hzn.json.
+[verbose] Reading configuration file: /home/localuser/EdgeLabStudentFiles/smartscale/smartscale-service/hzn.json
+Signing service...
+[verbose] acmegrocery/scales:v1 parsed into: domain=, path=acmegrocery/scales, tag=v1
+[verbose] The exchange url: https://169.63.59.84:8443/ec-exchange/v1
+[verbose] GET https://169.63.59.84:8443/ec-exchange/v1/orgs/bluem1/services/user01-smartscale-service_1.0.0_amd64
+[verbose] HTTP request timeout set to 30 seconds
+[verbose] HTTP code: 404
+Creating user01-smartscale-service_1.0.0_amd64 in the exchange...
+[verbose] The exchange url: https://169.63.59.84:8443/ec-exchange/v1
+[verbose] POST https://169.63.59.84:8443/ec-exchange/v1/orgs/bluem1/services
+[verbose] HTTP request timeout set to 30 seconds
+[verbose] HTTP code: 201
+Storing service.public.pem with the service in the exchange...
+[verbose] The exchange url: https://169.63.59.84:8443/ec-exchange/v1
+[verbose] PUT https://169.63.59.84:8443/ec-exchange/v1/orgs/bluem1/services/user01-smartscale-service_1.0.0_amd64/keys/service.public.pem
+[verbose] HTTP request timeout set to 30 seconds
+[verbose] HTTP code: 201
 If you haven't already, push your docker images to the registry:
-  docker push acmegrocery/scales_amd64:v1
-Adding service policy for service: fs20edgem/userXX-service-scale_1.0.0_amd64
+  docker push acmegrocery/scales:v1
+Adding service policy for service: bluem1/user01-smartscale-service_1.0.0_amd64
+[verbose] The exchange url: https://169.63.59.84:8443/ec-exchange/v1
+[verbose] GET https://169.63.59.84:8443/ec-exchange/v1/orgs/bluem1/services/user01-smartscale-service_1.0.0_amd64
+[verbose] HTTP request timeout set to 30 seconds
+[verbose] HTTP code: 200
+Adding built-in property values...
+The following property value will be overriden: service.url, service.name, service.org, service.version, service.arch
 Updating Service policy  and re-evaluating all agreements based on this Service policy. Existing agreements might be cancelled and re-negotiated.
+[verbose] The exchange url: https://169.63.59.84:8443/ec-exchange/v1
+[verbose] PUT https://169.63.59.84:8443/ec-exchange/v1/orgs/bluem1/services/user01-smartscale-service_1.0.0_amd64/policy
+[verbose] HTTP request timeout set to 30 seconds
+[verbose] HTTP code: 201
 Service policy updated.
-Service policy added for service: fs20edgem/user01-service-scale_1.0.0_amd64
+Service policy added for service: bluem1/user01-smartscale-service_1.0.0_amd64
 ```
 
 You may optionally chose to publish a `V1` and a `V2` version of each service if you would like to explore upgrading services on Edge Devices. (We already have the V1 and V2 versions of the container images waiting in DockerHub)
@@ -651,7 +715,7 @@ localuser@edge-device:~/EdgeLabStudentFiles/smartscale$ cat smartscale-node-regi
     "properties": [   /* A list of policy properties that describe the object. */
       {"name": "smartscale", "value": true},
       {"name": "user", "value": "userXX"},
-      {"name": "location", "value": "Obornicka 127, 62-002 Suchy Las, Poland"},
+      {"name": "location", "value": "3801 S Las Vegas Blvd, NS 89109, USA"},
       {"name": "type", "value": "SmartScale Video Analytics 1000"}
     ],
     "constraints": [  /* A list of constraint expressions of the form <property name> <operator> <property value>, separated by boolean o
@@ -661,13 +725,11 @@ localuser@edge-device:~/EdgeLabStudentFiles/smartscale$ cat smartscale-node-regi
   }
 ```
 
-Select `smartscale` .... `is equal to` .... `true` as a property. Click `+` sign and add also `user` .... `is equal to` ..... `userXX`.
+Select `smartscale` .... `is equal to` .... `true` as a property. 
 
-Can you spot the deliberate error in the screen capture? (*HINT Look at the properties names*)
+Click `+` sign and select `user` ..... `is equal to` ...... `userXX` where `XX` is your userid. In this way, the `service` that you created will now bind to your `node`. Take a minute to understand this.
 
-![](images/2020-01-22-23-14-50.png)
-
-and select `user` ..... `is equal to` ...... `userXX` where `XX` is your userid. In this way, the `service` that you created will now bind to your `node`. Take a minute to understand this.
+![](images/2020-02-18-17-09-10.png)
 
 Just select `Next` to continue
 
@@ -677,7 +739,7 @@ and `Next` again (there is no need to modify anything in this step)
 
 Finally, `Deploy Service`. 
 
-![](images/2020-01-22-23-16-46.png)
+![](images/2020-02-18-17-13-36.png)
 
 Now, let's verify if you haven't made any typo :)
 

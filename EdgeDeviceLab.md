@@ -620,7 +620,7 @@ Edit `hzn.json` to add your user it (userXX-) to the service name as below
 </pre>
 and `service.definition.json`
 
-</pre>
+<pre>
 {
     "org": "$HZN_ORG_ID",
     "label": "$SERVICE_NAME for $ARCH",

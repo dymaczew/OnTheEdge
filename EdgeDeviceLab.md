@@ -460,7 +460,7 @@ Success again - check the details of your node in the Edge Hub GUI and note the 
 
 ### 7. Check deployed services
 
-Now, verify what services are running on the device. (It can take a minute or 2 so be patient)
+Now, verify what services are running on the device. **(It can take a minute or 2 so be patient)**
 
 ```
 hzn agreement list
@@ -505,7 +505,8 @@ hzn agreement list
 After a while, you should see the two agreements which refelct two services being deployed on the device. Verify that they are actually running with the following command:
 
 ```
-docker ps
+$ docker ps
+
 CONTAINER ID        IMAGE                           COMMAND                  CREATED             STATUS              PORTS               NAMES
 b9f30198fa16        acmegrocery/analysis_amd64:v1   "docker-entrypoint.s…"   8 minutes ago       Up 8 minutes        8081/tcp            26f52ed4b83164817cd633d69929edc22749893cd26ea01cfa7124c7da3eec85-smartcart-service
 b54f692f2003        acmegrocery/battery_amd64:v1    "docker-entrypoint.s…"   28 minutes ago      Up 28 minutes       8080/tcp            f1b5a6fcde55da5a31be7392d15950d0c4d1662bd3b082370fdd2092f40454b1-battery_service
@@ -657,7 +658,7 @@ cd ~/EdgeLabStudentFiles/smartscale/smartscale-service
 
 This script is a wraper for the following command `hzn exchange service publish -O -I -f service.definition.json -p service.policy.json -v`
 
-Output should lokk like below:
+Output should look like below:
 
 ```
 [verbose] Reading configuration file: /etc/horizon/hzn.json
@@ -810,7 +811,8 @@ Use the `hzn`, `docker` `netstat` and `curl` commands to investigate.
 Look for the running Docker containers ...
 
 ```
-localuser@edge-device:~/EdgeLabStudentFiles/smartcart/battery-monitor-service$ docker ps
+$ docker ps
+
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                    NAMES
 f5a071b31f25        acmegrocery/battery_amd64:v1   "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8080->8080/tcp   02806edc799363d57241776d69d6d386f18dd057024b15d61a0652bf899dcb8c-battery_service
 a7f33de7a84d        acmegrocery/scales_amd64:v1    "docker-entrypoint.s…"   13 minutes ago      Up 13 minutes       8082/tcp                 21f41910cb786effcbef605f3ddb4aacc310bbbb4d7e22bad38413df0b479539-user01-smartscale-service
@@ -840,9 +842,9 @@ Connection: keep-alive
 V1 battery famous-fun
 
 curl -i localhost:8082
-curl: (7) Failed to connect to localhost port 8081: Connection refused
+curl: (7) Failed to connect to localhost port 8082: Connection refused
 ```
-The program source for these containers can be found here.
+The program source code for these containers can be found here.
 
 [battery](https://github.com/rhine59/EdgeLabStudentFiles/tree/master/smartcart/battery-monitor-service/build)
 
@@ -851,8 +853,6 @@ and
 [smartscale](https://github.com/rhine59/EdgeLabStudentFiles/tree/master/smartscale/smartscale-service/build)
 
 Take time to understand how we achieved this.
-
-This concludes the exercise, but here is some further information to enhance your understanding.
 
 ### Summary
 
@@ -866,6 +866,11 @@ At this point we have ...
 6. Defined a new Edge Service and attached some constraints to it
 7. Defined an Edge Policy to bind the Node to the Service and looked at the diagnostic evidence.
 8. Observed the new business service deployed to the Edge Device. 
+
+You have experienced how IBM Edge Application Manager can help managing edge devices at scale, using a policy-based autonomous management capabilities.
+
+This concludes the exercise, but here is some further information to enhance your understanding.
+
 
 ### Reset the edge device
 

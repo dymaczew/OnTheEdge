@@ -82,7 +82,11 @@ When you start this exercise, there is no Horizon agent installed on this device
 
 Follow the instruction working in the terminal window connected to the edge-device VM.
 
-Binaries for the edge device agent are already copied to your device, you can find them in `~/horizon-edge-packages`
+Binaries for the edge device agent are already copied to your device, you can find them in ~/horizon-edge-packages directory.
+
+Change the working directory to horizon-edge-packages
+
+`cd ~/horizon-edge-packages`
 
 In order to register edge-device VM as a managed edge device you need 2 additional items:
 - **api key** to authenticate yourself to the Edge Management hub
@@ -97,14 +101,15 @@ Authenticate to the IBM Edge Application Manager hub (Check the handout given yo
 <span style="color:green">**Group A**</span>
 
 <pre style="color:green">
-cloudctl login -a  https://fs20edgem.169.62.229.212.nip.io:8443 -u <userXX> \
--p ReallyStrongPassw0rd --skip-ssl-validation -n <userXX>
+cloudctl login -a  https://fs20edgem.169.62.229.212.nip.io:8443 -u userXX \
+-p ReallyStrongPassw0rd --skip-ssl-validation -n userXX
 </pre>
 
 <span style="color:blue">**Group B**</span>
+
 <pre style="color:blue">
-cloudctl login -a  https://bluem1.169.63.59.84.nip.io:8443 -u <userXX> \
--p ReallyStrongPassw0rd --skip-ssl-validation -n <userXX>
+cloudctl login -a  https://bluem1.169.63.59.84.nip.io:8443 -u userXX \
+-p ReallyStrongPassw0rd --skip-ssl-validation -n userXX
 </pre>
 
 

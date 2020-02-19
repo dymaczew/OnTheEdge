@@ -18,7 +18,14 @@ For the labs related to the IBM Edge Application Manager, you will be using the 
 
 To access the Hub cluster open a browser on your workstation and point it to:
 
+**Group A**
+
 <a href="https://fs20edgem.169.62.229.212.nip.io:8443" target="_blank">https://fs20edgem.169.62.229.212.nip.io:8443</a>
+
+**Group B**
+
+<a href="https://bluem1.169.63.59.84.nip.io:8443" target="_blank">https://bluem1.169.63.59.84.nip.io:8443</a>
+
 
 **ATTENTION: Lab tutorials were tested with Firefox browser.**
 
@@ -26,7 +33,7 @@ To access the Hub cluster open a browser on your workstation and point it to:
 
 To access the managed cluster you need a terminal with SSH client. On Mac or Linux workstation use a regular terminal, on Windows use Putty
 
-Open the Session URL given you by instructor. You should see the form similar to the one shown below:
+Open the [https://ibm.biz/fs20skytap](https://ibm.biz/fs20skytap) . You should see the form similar to the one shown below:
 
 ![](images/2020-01-20-13-57-59.png)
 

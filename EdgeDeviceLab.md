@@ -42,7 +42,7 @@ The link to the Edge hub server is below:
 
 **Group B**
 
-[IBM Edge Computing Manager console](https://fs20edgem.169.63.59.84.nip.io:8443/edge#/)
+[IBM Edge Computing Manager console](https://bluem1.169.63.59.84.nip.io:8443/edge#)
 
 After you have authenticated to the Edge Hub Server, you will need to navigate to the Edge management console via `Hamburger Menu` > `Edge Computing`
 

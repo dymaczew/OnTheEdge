@@ -56,7 +56,7 @@ When your `edge-device` is active, then connect via SSH
 
 Credentials for the Edge Device VM are `localuser / passw0rd`
 
-***Screenshot needed***
+![](images/2020-02-19-21-26-20.png)
 
 From a MAC or Linux run the command similar to the following from a local terminal on your workstation
 

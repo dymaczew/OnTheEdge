@@ -37,25 +37,15 @@ Open the [https://ibm.biz/fs20skytap](https://ibm.biz/fs20skytap) . You should s
 
 ![](images/2020-01-20-13-57-59.png)
 
-Provide you email address and click **Login**. Then, provide the code given you by instructor and click **Register**
-
-![](images/2020-01-20-14-09-35.png)
-
-Verify that the environment was started. Click **Launch Lab** link on the left.
-
-![](images/2020-01-20-14-16-12.png)
-
-If the managed cluster VM is not running start it clicking **Play** button. 
-
-![](images/2020-01-21-22-45-24.png)
+Provide you email address and click **Login**. Then, provide the code given you by instructor (**pie**) and click **Register**
 
 <span style="color:red">**IT IS NOT RECOMMENDED TO USE SKYTAP UI TO CONNECT TO THE MACHINE - YOU WILL USE A TERMINAL CONNECTION DIRECTLY FROM YOUR WORKSTATION**</span>
 
 You should see the page that looks like this
 
-![](images/2020-01-20-13-55-03.png)
+![](images/2020-02-19-21-26-54.png)
 
-Take a note of address and the port number, next to the **edge-device** VM. In above example, it is *services-uscentral.skytap.com* and *12316*. It is the SSH port exposed from the virtal machine for your instance.
+Take a note of address and the port number, next to the **edge-device** VM. In above example, it is *services-uscentral.skytap.com* and *14078*. It is the SSH port exposed from the virtal machine for your instance.
 
 Open the terminal on your workstation. Connect to the VM using user **localuser** with password **passw0rd**
 
@@ -66,7 +56,7 @@ ssh -p <port> localuser@<address>
 
 for example:
 ```
-ssh -p 12316 localuser@services-uscentral.skytap.com
+ssh -p 14078 localuser@services-uscentral.skytap.com
 ```
 
 For Windows use putty

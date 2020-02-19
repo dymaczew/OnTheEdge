@@ -414,7 +414,13 @@ Nodes registered using this file will have two business purposes.
 
 Now re-register the device with these properties.
 
-`sudo ./agent-install.sh -l 1 -n ../EdgeLabStudentFiles/smartcart/smartcart-node-registration.json`
+```
+sudo ./agent-install.sh -l 1 -n ../EdgeLabStudentFiles/smartcart/smartcart-node-registration.json
+```
+
+When propmpted `Do you want to overwrite the current node configuration?[y/N]:` answer `y`.
+
+Output should be similar to shown below:
 
 ```
 Node policy: ../EdgeLabStudentFiles/smartcart/smartcart-node-registration.json
@@ -515,7 +521,7 @@ You can also see this in the UI (you may need to scroll down the node details pa
 Now, let's explore in more details how to build and deploy a service using a smartscale as example. In the real world the smart devices are usually dedicated hardware devices. For our lab we will repurpose the edge-device VM and you will observe
 what happens to agreements and services running on the node.
 
-###  7. Re-registering the node as `smartscale` device
+###  7. Re-registering the node as 'smartscale' device
 
 Look at the `/home/localuser/EdgeLabStudentFiles/smartscale/smartscale-node-registration.json` file and you will see that `nodes` registered using this file will have two business purposes.
 
@@ -542,7 +548,11 @@ localuser@edge-device:~/EdgeLabStudentFiles/smartscale$ cat smartscale-node-regi
 
 So now we will re-register our Edge device with these new properties. We have done this earlier, so I will not include the verbose command output here.
 
-`sudo ./agent-install.sh -l 1 -n ../EdgeLabStudentFiles/smartscale/smartscale-node-registration.json`
+```
+sudo ./agent-install.sh -l 1 -n ../EdgeLabStudentFiles/smartscale/smartscale-node-registration.json
+```
+
+When propmpted `Do you want to overwrite the current node configuration?[y/N]:` answer `y`.
 
 Check the attributes of the `device` from the IBM Edge Application Manager user interface and see how they have changed.
 
